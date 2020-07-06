@@ -317,7 +317,7 @@ class Command(BaseCommand):
                     issuer=issuer,
                     subdivision=sub_division,
                     value=profile.subject,
-                    name="%s:%s[MPI for %s,%s]" % (u_p, profile.subject, u.first_name, u.last_name)
+                    name="%s-%s_MPI_for_%s_%s" % (u_p, profile.subject, u.first_name, u.last_name)
                 )
 
                 p_identifier = IndividualIdentifier.objects.create(
@@ -326,7 +326,7 @@ class Command(BaseCommand):
                     country="US",
                     subdivision=sub_division,
                     value=insurance_id,
-                    name="%s[INSURANCE_ID for %s,%s]" % (insurance_id, u.first_name, u.last_name)
+                    name="%s-INSURANCE_ID_for_%s_%s" % (insurance_id, u.first_name, u.last_name)
                 )
                 line = [insurance_id, profile.subject, first, last, u_p + i_padded, password]
                 outlist.append(line)
