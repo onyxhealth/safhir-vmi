@@ -244,6 +244,7 @@ class Organization(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    open_member_enrollment = models.CharField(max_length=80, default="", blank=True)
 
     def __str__(self):
         return self.name
