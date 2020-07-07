@@ -395,6 +395,7 @@ class UserProfile(models.Model):
     verifying_agent_email = models.EmailField(blank=True, default="", help_text="email of agent performing identity verification")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    website = models.CharField(max_length=512, blank=True, default='')
 
     def save(self, commit=True, **kwargs):
         if not self.subject:
