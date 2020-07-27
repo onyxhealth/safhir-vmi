@@ -1,0 +1,75 @@
+{% extends "oauth2_provider/base.html" %}
+
+{% load i18n %}
+{% block content %}
+<div class="block-center">
+    {% if not error %}
+    <form id="authorizationForm" method="post">
+        <h2>Patient Data Access Request</h2>
+        <h5 class="block-center-heading">Do you wish to allow {{ settings.APPLICATION_TITLE }} to share your personal health information?</h5>
+
+        <h4 style="color:red;">Understand the Risks:</h4>
+
+        <p>
+            You have the right to share your health information, but there may be risks. Be sure to review this application's Privacy Policy and Terms and Conditions.
+            When you allow Patient Data Access, you approve receive read-only access to your personal health information. This means that your information cannot be changed or downloaded by this application.
+        </p>
+
+
+        <h4>Your personal health information may include: </h4>
+
+        <ul>
+            <li>Conditions and Diagnosis</li>
+            <li>Medications</li>
+            <li>HIV-related information</li>
+            <li>Mental health information</li>
+            <li>Genetic testing information</li>
+            <li>Sexually transmitted disease information</li>
+            <li>Reproductive health information, including abortion information</li>
+            <li>Alcohol and substance abuse treatment information</li>
+        </ul>
+
+
+        <p>Please note that {{ settings.APPLICATION_TITLE }} has only <i>some</i> of your personal health information. {{ settings.APPLICATION_TITLE }} personal health information is not your official or complete medical record.</p>
+
+        <h4>By clicking "Approve" you also:</h4>
+
+
+        <p></p>
+
+        <ul>
+            <li>Connect this application through your own choice. You should only approve access to applications you trust.</li>
+            <li>Agree that {{ settings.APPLICATION_TITLE }} is not responsible for any misuse of personal health information by the application you are approving.</li>
+            <li>Understand that the application I am accessing my data with is likely not covered by the privacy and security protections of <a href="https://www.hhs.gov/hipaa/index.html">HIPAA</a>.</li>
+        </ul>
+
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" class="btn btn-large btn-primary" name="allow" value="Yes" />
+                <input type="submit" class="btn btn-large" value="No" />
+
+            </div>
+        </div>
+
+
+        {% csrf_token %}
+
+        {% for field in form %}
+        {% if field.is_hidden %}
+        {{ field }}
+        {% endif %}
+        {% endfor %}
+
+
+        {{ form.errors }}
+        {{ form.non_field_errors }}
+
+    </form>
+
+    {% else %}
+    <h2>Error: {{ error.error }}</h2>
+    <p>{{ error.description }}</p>
+    {% endif %}
+
+</div>
+{% endblock %}
